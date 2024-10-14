@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Enhanced</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f2f2f2;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Left blue curve */
+        .left-curve {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: #add8e6;
+            clip-path: ellipse(60% 100% at 0% 50%);
+        }
+
+        /* Right brown curve */
+        .right-curve {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: #d2b48c;
+            clip-path: ellipse(60% 100% at 100% 50%);
+        }
+
+        .contact-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 450px;
+            backdrop-filter: blur(5px);
+            z-index: 1; /* To keep it on top of background curves */
+            animation: fadeIn 1.5s ease-in-out;
+            position: relative;
+            overflow: hidden; /* To keep the curved backgrounds visible */
+        }
+
+        /* Inner curves for the contact form */
+        .inner-curve {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind the contact container */
+        }
+
+        .inner-curve-left {
+            background: #d2b48c;
+            clip-path: ellipse(60% 100% at 0% 50%);
+        }
+
+        .inner-curve-right {
+            background: #add8e6;
+            clip-path: ellipse(60% 100% at 100% 50%);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            animation: textGlow 1s ease-in-out infinite alternate;
+        }
+
+        .contact-info {
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .contact-info p {
+            font-size: 18px;
+            color: #444;
+            margin: 10px 0;
+            opacity: 0.8;
+        }
+
+        .contact-info a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #003366;
+        }
+
+        .whatsapp-link {
+            color: white;
+            background-color: #b6894e;
+            display: inline-block;
+            padding: 12px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .whatsapp-link:hover {
+            background-color: #66abc2;
+            transform: scale(1.05);
+        }
+
+        .form-container {
+            margin-top: 20px;
+            position: relative; /* So inner curves align properly */
+        }
+
+        .form-container input, .form-container textarea {
+            width: calc(100% - 24px); /* Adjusted for padding */
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(3px);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+
+        .form-container input:focus, .form-container textarea:focus {
+            border-color: #0066cc;
+            box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
+            outline: none;
+        }
+
+        .form-container button {
+            background-color: #488fa7;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: pulse 1s infinite;
+        }
+
+        .form-container button:hover {
+            background-color: #b6894e;
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px #0066cc, 0 0 20px #0066cc; }
+            100% { text-shadow: 0 0 20px #0066cc, 0 0 40px #005bb5; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .contact-container {
+                width: 50%; /* Full width on smaller screens */
+                padding: 10px; /* Reduced padding */
+            }
+
+            h1 {
+                font-size: 1.5rem; /* Smaller heading */
+            }
+
+            .contact-info p {
+                font-size: 16px; /* Smaller font size for info */
+            }
+
+            .form-container input, 
+            .form-container textarea {
+                font-size: 14px; /* Smaller font size for inputs */
+            }
+
+            .form-container button {
+                font-size: 16px; /* Smaller font size for button */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.2rem; /* Further reduced heading size */
+            }
+
+            .contact-info p {
+                font-size: 14px; /* Further reduced info font size */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Left curved blue background -->
+    <div class="left-curve"></div>
+
+    <!-- Right curved brown background -->
+    <div class="right-curve"></div>
+    
+    <div class="contact-container">
+        <!-- Inner left curved blue background -->
+        <div class="inner-curve inner-curve-left"></div>
+        <!-- Inner right curved brown background -->
+        <div class="inner-curve inner-curve-right"></div>
+    
+        <h1>Contact Us</h1>
+    
+        <div class="contact-info">
+            <p><strong>Email:</strong> contact@example.com</p>
+            <p><strong>Phone:</strong> 
+                <a href="tel:923110205136">0311-0205136</a>
+            </p>
+            <p>
+                <a href="#" 
+                   class="whatsapp-link" 
+                   target="_blank" 
+                   id="whatsapp-button">
+                    Chat with us on WhatsApp
+                </a>
+            </p>
+        </div>
+    
+        <div class="form-container">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Message" required></textarea>
+            <button>Submit</button>
+        </div>
+    </div>
+    
+    <script>
+        // Function to open WhatsApp chat with a pre-defined message
+        function openWhatsAppChat() {
+            const phoneNumber = "923110205136"; // Your WhatsApp number
+            const message = "Thank you for contacting us. What can I help you with?";
+            
+            // Encode the message properly
+            const encodedMessage = encodeURIComponent(message);
+            const url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            // Open WhatsApp in a new tab
+            window.open(url, '_blank');
+        }
+    
+        // Event listener for the WhatsApp button
+        document.getElementById('whatsapp-button').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            openWhatsAppChat();
+        });
+    </script>
+</body>
+</html>

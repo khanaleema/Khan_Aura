@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khan Aura</title>
+    <style>
+
+
+
+/* General styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccc;
+    border: 1px solid #333;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.box:hover {
+    background-color: #999;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    width: 270px; /* Increased width */
+    height: 100%;
+    background-color: #07bdbd; /* Aqua */
+    color: white;
+    padding-top: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Slight glow effect */
+    z-index: 1; /* Ensure sidebar is lower than products */
+}
+
+/* Logo styling */
+.sidebar .logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-image: url('logo2.jpg'); /* Replace with your logo */
+    background-size: cover;
+    background-position: center;
+    margin: 0 auto;
+    box-shadow: 0 0 10px white, 0 0 20px rgb(19, 17, 17); /* Glowing effect for the logo */
+}
+
+/* "Khan Aura" text */
+.sidebar h2 {
+    margin-top: 10px;
+    font-size: 2rem; /* Increased font size */
+    color: white;
+    text-shadow: 0 0 10px white, 0 0 20px rgb(44, 41, 41); /* Glowing effect */
+}
+
+/* Sidebar links */
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1.5rem; /* Increased font size */
+    position: relative; /* Position for glowing line */
+}
+
+.sidebar a:hover {
+    background-color: #1f9696; /* Darker Aqua on hover */
+}
+
+/* Glowing line */
+.sidebar a::after {
+    content: '';
+    display: block;
+    width: 70%;
+    height: 2px;
+    margin: 5px auto 0;
+    background-color: #fff;
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00ffff, 0 0 40px #00ffff;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.sidebar a:hover::after {
+    opacity: 1; /* Show glowing line on hover */
+}
+
+/* Sidebar glow effect */
+.sidebar a.glow {
+    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px #00ffff, 0 0 40px #00ffff;
+}
+
+/* Main content */
+.main-content {
+    margin-left: 270px; /* Adjusted margin for increased sidebar width */
+    height: 100vh;
+    position: relative;
+}
+
+/* Background image slider */
+.bg-slideshow img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    opacity: 0;
+    animation: slideAnimation 20s infinite;
+}
+
+.bg-slideshow img:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.bg-slideshow img:nth-child(2) {
+    animation-delay: 5s;
+}
+
+.bg-slideshow img:nth-child(3) {
+    animation-delay: 10s;
+}
+
+.bg-slideshow img:nth-child(4) {
+    animation-delay: 15s;
+}
+
+@keyframes slideAnimation {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Brand container */
+.brand-container {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.brand-container h1 {
+    color: #07bdbd;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.brand-container p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #221e21;
+    text-shadow: 0 0 5px rgb(51, 122, 124), 0 0 10px rgba(73, 179, 170, 0.7), 0 0 15px rgba(58, 192, 226, 0.5); /* Glowing shadow effect */
+}
+
+.brand-container a {
+    text-decoration: none;
+    background-color: #07bdbd;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+}
+
+.brand-container a:hover {
+    background-color: #1f9696;
+}
+
+/* Products Section - Shift to the right */
+.products-section {
+    max-width: 1000px; /* Width adjust to fit well */
+    margin: 20px auto 0; /* Added margin-top to move it down */
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    position: relative;
+    margin-left: 280px; /* Adjusted margin to shift the section more to the right */
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusts columns based on screen size */
+    gap: 20px;
+    justify-content: center;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    background-color: #07bdbd;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 150px; /* Fixed height for images */
+    object-fit: cover; /* Maintain aspect ratio and cover the area */
+    border-radius: 4px;
+}
+
+.button {
+    padding: 10px 15px;
+    background-color: #128C7E; /* WhatsApp Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background-color: #25D366; /* Darker WhatsApp Green */
+} 
+
+.colour {
+    text-align: center;
+    background-color: #07bdbd; /* Keep the same color */
+    color: white;
+    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px #07bdbd, 0 0 40px #07bdbd;
+    box-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px #07bdbd, 0 0 40px #07bdbd;
+}
+.inhance {
+    font-weight: 400;
+    font-size: 15px;
+    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px #171117, 0 0 40px #130b13;
+}
+.text {
+    font-size: 15px; 
+    text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px #171117, 0 0 40px #130b13;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px; /* Reduce sidebar width */
+    }
+
+    .main-content {
+        margin-left: 200px; /* Adjust margin */
+    }
+
+    .products-section {
+        margin-left: 220px; /* Adjust margin for products */
+    }
+
+    .product-card {
+        height: auto; /* Let height adjust based on content */
+    }
+
+    .sidebar h2 {
+        font-size: 1.5rem; /* Reduce font size */
+    }
+
+    .sidebar a {
+        font-size: 1.2rem; /* Reduce font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar {
+        width: 150px; /* Further reduce sidebar width */
+    }
+
+    .main-content {
+        margin-left: 150px; /* Adjust margin */
+    }
+
+    .products-section {
+        margin-left: 170px; /* Adjust margin for products */
+    }
+
+    .sidebar h2 {
+        font-size: 1.2rem; /* Reduce font size */
+    }
+
+    .sidebar a {
+        font-size: 1rem; /* Reduce font size */
+    }
+}
+
+
+
+    </style>
+</head>
+<body>
+
+
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Logo -->
+        <div class="logo"></div>
+
+        <!-- "Khan Aura" Text -->
+        <h2>Khan Aura</h2>
+
+        <!-- Sidebar Links -->
+        <a href="#" id="home-link" class="glow">Home</a>
+        <a href="#" id="product-link">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="review.html">Reviews</a>
+    </div>
+
+    <!-- Main content -->
+
+
+    <div class="main-content" id="home-section">
+        <!-- Background image slider -->
+        <div class="bg-slideshow">
+            <img src="img10.jpg" alt="Image 1">
+            <img src="img2.jpg" alt="Image 2">
+            <img src="img8.jpg" alt="Image 3">
+            <img src="img9.webp" alt="Image 4">
+        </div>
+
+        <!-- Brand info container -->
+        <div class="brand-container">
+            <h1>Welcome to Khan Aura</h1>
+            <p>At Khan Aura, we provide top-quality cleaning products like hand wash, phenyl, Dettol, Harpic, and more to keep your home safe and germ-free.</p>
+            <a href="#" id="explore-products-btn">Explore Our Products</a>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+<div id="products-section" class="products-section">
+    <h1 class="colour">Our Products</h1>
+    <div class="products-grid">
+        <div class="product-card">
+            <img src="ed.png" alt="Product 9">
+            <h3 class="text">Washroom Cleaner (500ml)</h3>
+            <p class="inhance">Price: 245 PKR </p>
+            <button class="button" onclick="sendToWhatsApp('Washroom Cleaner (500ml)', '245 PKR')">Order via WhatsApp</button>
+        </div>
+
+        <div class="product-card">
+            <img src="ed (2).png" alt="Product 8">
+            <h3 class="text">Hand $ Body Wash (500ml)</h3>
+            <p class="inhance">Price: 259 PKR </p>
+            <button class="button" onclick="sendToWhatsApp('Hand $ Body Wash (500ml)', ' 259 PKR')">Order via WhatsApp</button>
+        </div>
+
+        <div class="product-card">
+            <img src="ed (3).png" alt="Product 2">
+            <h3 class="text">Washroom Cleaner (250ml)</h3>
+            <p class="inhance">Price: 130 PKR</p>
+            <button class="button" onclick="sendToWhatsApp('Washroom Cleaner (250ml)', '130 PKR')">Order via WhatsApp</button>
+        </div>
+
+        <div class="product-card">
+            <img src="ed (4).png" alt="Product 9">
+            <h3 class="text">Dish Wash (500ml)</h3>
+            <p class="inhance">Price: 245 PKR</p>
+            <button class="button" onclick="sendToWhatsApp('Dish Wash (500ml)', '245 PKR')">Order via WhatsApp</button>
+        </div>
+
+        <div class="product-card">
+            <img src="ed (6).png" alt="Product 9">
+            <h3 class="text"> Mop Cleaner (250ml) </h3>
+            <p class="inhance">Price: 130 PKR</p>
+            <button class="button" onclick="sendToWhatsApp('Mop Cleaner (250ml)', '130 PKR')">Order via WhatsApp</button>
+        </div>
+
+        <div class="product-card">
+            <img src="ed (5).png" alt="Product 9">
+            <h3 class="text" >Dish Wash (250ml)</h3>
+            <p class="inhance">Price: 130 PKR</p>
+            <button class="button" onclick="sendToWhatsApp('Dish Wash (250ml)', '130 PKR')">Order via WhatsApp</button>
+        </div>
+
+        <div class="product-card">
+            <img src="ed (1).png" alt="Product 9">
+            <h3 class="text"> Clothes Comfort (500ml)</h3>
+            <p class="inhance">Price: 245 PKR</p>
+            <button class="button" onclick="sendToWhatsApp(' Clothes Comfort (500ml)', '245 PKR')">Order via WhatsApp</button>
+        </div>
+
+        <div class="product-card">
+            <img src="ed (7).png" alt="Product 9">
+            <h3 class="text">Mop Cleaner (500ml)</h3>
+            <p class="inhance">Price: 245 PKR</p>
+            <button class="button" onclick="sendToWhatsApp('Mop Cleaner (500ml)', ' 245 PKR')">Order via WhatsApp</button>
+        </div>
+
+        <div class="product-card">
+            <img src="ed (8).png" alt="Product 9">
+            <h3 class="text">Liquid Surf + shiner (250ml)</h3>
+            <p class="inhance">Price: 130 PKR</p>
+            <button class="button" onclick="sendToWhatsApp('Liquid Surf + shiner (250ml)', '130 PKR')">Order via WhatsApp</button>
+        </div>
+    </div>
+</div>
+
+    <!-- WhatsApp ordering functionality -->
+    <script>
+       // Function to send product details to WhatsApp
+       function sendToWhatsApp(productName, price) {
+    // Ensure the productName and price are not empty
+    if (!productName || !price) {
+        alert("Product name and price are required!");
+        return; // Exit the function if missing data
+    }
+
+    // Log product details for debugging
+    console.log("Product Name:", productName);
+    console.log("Price:", price);
+
+    // Construct the message for WhatsApp
+    var message = `I would like to place an order for: ${productName} with a price of: ${price}.`;
+
+    // Encode the message properly for WhatsApp URL
+    var whatsappUrl = `https://wa.me/923110205136?text=${encodeURIComponent(message)}`;
+    
+    // Log the WhatsApp URL
+    console.log("WhatsApp URL:", whatsappUrl);
+
+    // Ask for confirmation before sending (optional)
+    var orderPlaced = confirm("Do you want to place the order?");
+    
+    if (orderPlaced) {
+        // Open WhatsApp in a new tab/window
+        window.open(whatsappUrl, "_blank");
+        
+        // Thank you message after order is confirmed
+        setTimeout(function() {
+            alert("Thank you for placing your order with Khan Aura! We will get in touch with you soon.");
+        }, 2000); // 2-second delay for thank you message
+    } else {
+        alert("Your order was not placed.");
+    }
+}
+
+
+        // Toggle visibility between home and products section
+        document.getElementById('explore-products-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('products-section').style.display = 'block';
+            document.getElementById('contact-section').style.display = 'none';
+        });
+
+        // Sidebar navigation functionality
+        document.getElementById('product-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('home-section').style.display = 'none';
+            document.getElementById('products-section').style.display = 'block';
+            document.getElementById('contact-section').style.display = 'none';
+        });
+
+        document.getElementById('home-link').addEventListener('click', function (e) {
+            e.preventDefault();
+            document.getElementById('home-section').style.display = 'block';
+            document.getElementById('products-section').style.display = 'none';
+            document.getElementById('contact-section').style.display = 'none';
+        });
+
+        // / New functionality for "Contact Us"
+document.getElementById('contact-link').addEventListener('click', function (e) {
+    e.preventDefault();
+    document.getElementById('home-section').style.display = 'none';
+    document.getElementById('products-section').style.display = 'none';
+    document.getElementById('contact-section').style.display = 'block'; // Show contact section
+});
+    </script>
+
+</body>
+</html>
