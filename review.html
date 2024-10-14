@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: radial-gradient(circle, 
+                #dddbdb,    /* Light pink */
+                #b9b3a9,    /* Light peach */
+                #a0aab4,    /* Light blue */
+                #74a0a1,    /* Light green */
+                #f4f4f4,    /* Very light gray */
+                #c0b8c9,    /* Light purple */
+                #c2b5b5,    /* Lighter pink */
+                #f0f8ff);   /* Alice blue */
+            margin: 0;
+            padding: 0;
+        }
+
+        .reviews-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #e2d7d7;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .review-item {
+            margin: 20px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .review-item img {
+            width: 40%;
+            height: auto;
+            max-height: 250px;
+            object-fit: contain;
+            object-position: center;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-right: 20px;
+        }
+
+        .review-text {
+            width: 60%;
+        }
+
+        .customer-initial {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .initial-1 { background-color: lightcoral; }
+        .initial-2 { background-color: paleturquoise; }
+        .initial-3 { background-color: #df5c8e; }
+
+        .text {
+            text-shadow: 0 0 5px rgb(230, 96, 169), 0 0 10px rgba(248, 153, 198, 0.7), 0 0 15px rgba(230, 102, 187, 0.5);
+            font-size: 25px;
+        }
+
+        .pg {
+            text-shadow: 0 0 5px rgb(241, 140, 216), 0 0 10px rgba(153, 190, 93, 0.7), 0 0 15px rgba(255, 218, 185, 0.5);
+            background-color: rgb(197, 197, 135);
+            font-size: 20px;
+        }
+
+        .pi {
+            text-shadow: 0 0 10px white, 0 0 20px rgb(19, 17, 17);
+        }
+
+        /* Media Queries for Responsive Design */
+        @media (max-width: 992px) {
+            .review-item img {
+                width: 50%; /* Reduce image width on smaller screens */
+            }
+
+            .review-text {
+                width: 50%; /* Adjust text width on smaller screens */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .review-item {
+                flex-direction: column; /* Stack image and text vertically */
+                align-items: center;
+            }
+
+            .review-item img {
+                width: 80%; /* Adjust image width for smaller screens */
+                margin-bottom: 10px;
+                margin-right: 0; /* Remove right margin */
+            }
+
+            .review-text {
+                width: 100%; /* Full width for text */
+                text-align: center; /* Center align text */
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px; /* Smaller heading for mobile */
+            }
+
+            .text {
+                font-size: 18px; /* Smaller text size for mobile */
+            }
+
+            .pg {
+                font-size: 16px; /* Adjust textarea font size */
+            }
+
+            .reviews-container {
+                padding: 10px; /* Reduce container padding */
+            }
+
+            .review-item img {
+                width: 100%; /* Full width image on very small screens */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="reviews-container">
+        <h1 class="pi">Customer Reviews</h1>
+
+        <div class="review-item">
+            <img src="h1.jpg" alt="Review Image" width="300px">
+            <div class="review-text">
+                <div class="customer-initial initial-2">J</div>
+                <p class="text"> Javaria Khan</p>
+                <textarea rows="5" class="pg" readonly>I loved it! All products are so good in quality and price.</textarea>
+            </div>
+        </div>
+
+        <div class="review-item">
+            <img src="h1.jpg" alt="Review 2">
+            <div class="review-text">
+                <div class="customer-initial initial-1">A</div>
+                <p class="text"> Amna Batool</p>
+                <textarea rows="5" class="pg" readonly>Awesome experience!</textarea>
+            </div>
+        </div>
+
+        <div class="review-item">
+            <img src="h1.jpg" alt="Review 3">
+            <div class="review-text">
+                <div class="customer-initial initial-3">B</div>
+                <p class="text">Bina Rao</p>
+                <textarea rows="5" class="pg" readonly>Will definitely recommend!</textarea>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
